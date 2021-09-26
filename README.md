@@ -1,6 +1,6 @@
-# Elspeth Lee - Sep 2021
+# Python limb darkening testing code for gCMCRT. 
 
-Python limb darkening testing code for gCMCRT. 
+Elspeth Lee - Sep 2021
 
 Samples a random transit chord on the transit annulus - projects it back onto the stellar disk,
 then calculates directly the stellar zenith angle of the chord,
