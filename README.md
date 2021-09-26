@@ -15,3 +15,6 @@ NOTE: Requires cartopy to work: https://scitools.org.uk/cartopy/docs/latest/
 
 This code may also be cool as a jupyter notebook...
 
+![Example projection](Ortho_0_0.png)
+
+
