@@ -22,7 +22,7 @@ Msun = 1.98847e30
 
 
 # Number of random samples wanted
-nsamp = 100
+nsamp = 250
 
 # limb darkening law integer picker
 ilimb = 2
@@ -207,8 +207,8 @@ for n in range(nsamp):
 fig = plt.figure()
 
 plt.plot(mus,Imus)
-plt.scatter(mu_z,Imu_z)
-plt.plot(mu_cent,Imu_cent,'x')
+plt.scatter(mu_z,Imu_z,s=5)
+plt.plot(mu_cent,Imu_cent,'x',markersize=5)
 plt.xlabel('mu')
 plt.ylabel('I(mu)')
 plt.title('LD Coefficent')
@@ -217,23 +217,23 @@ plt.title('LD Coefficent')
 fig = plt.figure(figsize=(10, 5))
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
 ax.set_global()
-ax.plot(phi_arr,theta_arr,'o',transform=ccrs.PlateCarree())
-ax.plot(phi_cent,theta_cent,'x',transform=ccrs.PlateCarree())
+ax.plot(phi_arr,theta_arr,'o',transform=ccrs.PlateCarree(),markersize=1)
+ax.plot(phi_cent,theta_cent,'x',transform=ccrs.PlateCarree(),markersize=5)
 gl = ax.gridlines(draw_labels=True)
 plt.title('Flat projection')
 
 # fig = plt.figure(figsize=(10, 5))
 # ax = fig.add_subplot(1, 1, 1, projection=ccrs.EqualEarth())
 # ax.set_global()
-# ax.plot(phi_arr,theta_arr,'o',transform=ccrs.PlateCarree())
-# ax.plot(phi_cent,theta_cent,'x',transform=ccrs.PlateCarree())
+# ax.plot(phi_arr,theta_arr,'o',transform=ccrs.PlateCarree(),markersize=1)
+# ax.plot(phi_cent,theta_cent,'x',transform=ccrs.PlateCarree(),markersize=5)
 # gl = ax.gridlines(draw_labels=True)
 
 fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(0,0))
 ax.set_global()
-ax.plot(phi_arr,theta_arr,'o',transform=ccrs.PlateCarree())
-ax.plot(phi_cent,theta_cent,'x',transform=ccrs.PlateCarree())
+ax.plot(phi_arr,theta_arr,'o',transform=ccrs.PlateCarree(),markersize=1)
+ax.plot(phi_cent,theta_cent,'x',transform=ccrs.PlateCarree(),markersize=5)
 gl = ax.gridlines(draw_labels=True)
 plt.title('Orthographic projection (0,0)')
 
@@ -241,8 +241,8 @@ plt.title('Orthographic projection (0,0)')
 fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(phi_cent,theta_cent))
 ax.set_global()
-ax.plot(phi_arr,theta_arr,'o',transform=ccrs.PlateCarree())
-ax.plot(phi_cent,theta_cent,'x',transform=ccrs.PlateCarree())
+ax.plot(phi_arr,theta_arr,'o',transform=ccrs.PlateCarree(),markersize=1)
+ax.plot(phi_cent,theta_cent,'x',transform=ccrs.PlateCarree(),markersize=5)
 gl = ax.gridlines(draw_labels=True)
 plt.title('Orthographic projection - (phi_cent,theta_cent)')
 
