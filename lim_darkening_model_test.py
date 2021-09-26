@@ -40,7 +40,7 @@ Rz = Rp + zp
 Rs = 0.805 * Rsun
 a = 0.03142 * au
 
-# Inclination in degrees
+# Inclination in degrees (can be negative for south tacking transits)
 inc = 85.51
 
 # Phase of planet (0-1) - 0.0 is mid transit
@@ -67,26 +67,28 @@ thetas = np.linspace(0,90,nang)
 mus = np.cos(thetas * np.pi/180.0)
 
 # Could use switches here but i'm lazy
+# Laws and references taken from John Southworth's (Keele) website
+
 if (ilimb == 1):
-  # Schwartzchild
+  # Linear - Schwarzschild (1906)
   Imus = 1.0 - c1*(1.0 - mus)
 elif (ilimb == 2):
-  # Quadratic
+  # Quadratic - Kopal (1950)
   Imus = 1.0 - c1*(1.0 - mus) - c2*(1.0 - mus)**2
 elif (ilimb == 3):
-  # Square root law
+  # Square root law - Díaz-Cordovés & Giménez (1992)
   Imus = 1.0 - c1*(1.0 - mus) - c2*(1.0 - np.sqrt(mus))
 elif (ilimb == 4):
-  # Logarithmic
+  # Logarithmic - Klinglesmith & Sobieski (1970)
   Imus = 1.0 - c1*(1.0 - mus) - c2*mus*np.log(mus)
 elif (ilimb == 5):
-  # Exponental law
+  # Exponential law - Claret & Hauschildt (2003)
   Imus = 1.0 - c1*(1.0 - mus) - c2/(1.0 - np.exp(mus))
 elif (ilimb == 6):
-  # Sing (2009) three paramater
+  # Three paramater - Sing (2009)
   Imus = 1.0 - c1*(1.0 - mus) - c2*(1.0 - mus**(3.0/2.0)) - c3*(1.0 - mus**2)
 elif (ilimb == 7):
-  # Claret (2000) four parameter
+  # Four parameter - Claret (2000)
   Imus = 1.0 - c1*(1.0 - np.sqrt(mus)) - c2*(1.0 - mus) - c3*(1.0 - mus**(3.0/2.0)) - c4*(1.0 - mus**2)
 
 # Calculate the phase angle in degrees from the 0 longitude, where 90 would be direct facing.
@@ -178,27 +180,22 @@ for n in range(nsamp):
 
     # Calculate zenith angle of star and the limb darkening law
     mu_z[n] = np.cos(theta) * np.cos(phi)
+
+    # Calculate the LD coefficent for this zenith angle
     # Could use switches here but i'm lazy
     if (ilimb == 1):
-      # Schwartzchild
       Imu_z[n] = 1.0 - c1*(1.0 - mu_z[n])
     elif (ilimb == 2):
-      # Quadratic
       Imu_z[n] = 1.0 - c1*(1.0 - mu_z[n]) - c2*(1.0 - mu_z[n])**2
     elif (ilimb == 3):
-      # Square root law
       Imu_z[n] = 1.0 - c1*(1.0 - mu_z[n]) - c2*(1.0 - np.sqrt(mu_z[n]))
     elif (ilimb == 4):
-      # Logarithmic
       Imu_z[n] = 1.0 - c1*(1.0 - mu_z[n]) - c2*mu_z[n]*np.log(mu_z[n])
     elif (ilimb == 5):
-      # Exponental law
       Imu_z[n] = 1.0 - c1*(1.0 - mu_z[n]) - c2/(1.0 - np.exp(mu_z[n]))
     elif (ilimb == 6):
-      # Sing (2009) three paramater
       Imu_z[n] = 1.0 - c1*(1.0 - mu_z[n]) - c2*(1.0 - mu_z[n]**(3.0/2.0)) - c3*(1.0 - mu_z[n]**2)
     elif (ilimb == 7):
-      # Claret (2000) four parameter
       Imu_z[n] = 1.0 - c1*(1.0 - np.sqrt(mu_z[n])) - c2*(1.0 - mu_z[n]) - c3*(1.0 - mu_z[n]**(3.0/2.0)) - c4*(1.0 - mu_z[n]**2)
 
     #print(mu_z[n], Imu_z[n])
@@ -238,7 +235,6 @@ gl = ax.gridlines(draw_labels=True)
 plt.title('Orthographic projection (0,0)')
 
 #plt.savefig('Ortho_0_0.png', dpi=300)
-
 
 fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(phi_cent,theta_cent))
