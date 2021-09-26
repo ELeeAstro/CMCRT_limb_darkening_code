@@ -237,6 +237,8 @@ ax.plot(phi_cent,theta_cent,'x',transform=ccrs.PlateCarree(),markersize=5)
 gl = ax.gridlines(draw_labels=True)
 plt.title('Orthographic projection (0,0)')
 
+#plt.savefig('Ortho_0_0.png', dpi=300)
+
 
 fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.Orthographic(phi_cent,theta_cent))
